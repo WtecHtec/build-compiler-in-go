@@ -58,7 +58,7 @@ func Make(op Opcode, operands ...int) []byte {
 		width := def.OperandWidths[i]
 		switch width {
 		case 2:
-			// 256 进制
+			// 256 进制 2 个字节
 			binary.BigEndian.PutUint16(instruction[offset:], uint16(o))
 		}
 		offset += width
@@ -121,5 +121,6 @@ func ReadOperands(def *Definition, ins Instructions) ([]int, int) {
 }
 
 func ReadUint16(ins Instructions) uint16 {
+	// 2 个字节
 	return binary.BigEndian.Uint16(ins)
 }

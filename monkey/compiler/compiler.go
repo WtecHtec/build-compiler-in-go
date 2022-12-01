@@ -79,7 +79,7 @@ func (c *Compiler) Compile(node ast.Node) error {
 	return nil
 }
 
-// 添加常量池
+// 添加常量池, 返回索引
 func (c *Compiler) addConstant(obj object.Object) int {
 	c.constants = append(c.constants, obj)
 	return len(c.constants) - 1
