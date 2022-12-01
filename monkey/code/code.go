@@ -15,6 +15,7 @@ type Opcode byte // 字节描述
 // 操作数
 const (
 	OpConstant Opcode = iota
+	OpAdd
 )
 
 type Definition struct {
@@ -24,6 +25,7 @@ type Definition struct {
 
 var definitions = map[Opcode]*Definition{
 	OpConstant: {"OpConstant", []int{2}}, // 常量字节码
+	OpAdd:      {"OpAdd", []int{}},
 }
 
 // 检查
@@ -92,6 +94,8 @@ func (ins Instructions) fmtInstruction(def *Definition, operands []int) string {
 	}
 
 	switch operandCount {
+	case 0:
+		return def.Name
 	case 1:
 		return fmt.Sprintf("%s %d", def.Name, operands[0])
 	}
