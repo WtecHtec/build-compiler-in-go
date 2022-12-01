@@ -1,7 +1,6 @@
 package main
 
 import (
-	"encoding/binary"
 	"fmt"
 	"monkey/repl"
 	"os"
@@ -27,12 +26,6 @@ func (test Test) String() string {
 	return "测试"
 }
 
-const (
-	OpConstant int = iota
-)
-
 func main() {
-	res := make([]byte, 2)
-	binary.BigEndian.PutUint16(res[0:], uint16(256))
-	fmt.Print(res)
+	infaCompiler()
 }
