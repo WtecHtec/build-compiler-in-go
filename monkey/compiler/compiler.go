@@ -33,8 +33,6 @@ func (c *Compiler) Bytecode() *Bytecode {
 	}
 }
 
-// compiler/compiler.go
-
 func (c *Compiler) Compile(node ast.Node) error {
 	switch node := node.(type) {
 	case *ast.Program:
@@ -70,7 +68,6 @@ func (c *Compiler) Compile(node ast.Node) error {
 		}
 
 	case *ast.IntegerLiteral:
-		// TODO: 如何处理？！
 		integer := &object.Integer{Value: node.Value}
 		c.emit(code.OpConstant, c.addConstant(integer))
 
