@@ -18,12 +18,13 @@
 常量=> [OP, 0, 2] => 2
 切片 1 开始转换数据
 # 文件夹 compiler
+生成字节码数组类型结构
 编译器,将ast抽象树编译成字节码的数据格式
 instructions code.Instructions // 生成的字节码
 constants    []object.Object   // 数据池
 数据将会在 instructions 中以索引的形式存储, 取数时根据索引从数据池中取数
 # 文件夹 vm
-虚拟机,实现调用栈，运行 compiler 生成的字节码数据格式。
+虚拟机,遍历 compiler 生成的字节码数组，实现调用栈，执行代码。
 ```
  type VM struct {
 	constants    []object.Object // 数据池

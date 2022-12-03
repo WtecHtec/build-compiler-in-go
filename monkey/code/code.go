@@ -14,8 +14,19 @@ type Opcode byte // 字节描述
 
 // 操作数
 const (
-	OpConstant Opcode = iota
-	OpAdd
+	OpConstant    Opcode = iota // 常量
+	OpAdd                       // +
+	OpPop                       // 弹出
+	OpSub                       // -
+	OpMul                       // *
+	OpDiv                       // /
+	OpTrue                      // true
+	OpFalse                     // false
+	OpEqual                     // ==
+	OpNotEqual                  // ！=
+	OpGreaterThan               // >
+	OpMinus                     // -7
+	OpBang                      // ！true
 )
 
 type Definition struct {
@@ -26,6 +37,19 @@ type Definition struct {
 var definitions = map[Opcode]*Definition{
 	OpConstant: {"OpConstant", []int{2}}, // 常量字节码
 	OpAdd:      {"OpAdd", []int{}},
+	OpPop:      {"OpPop", []int{}},
+	OpSub:      {"OpSub", []int{}},
+	OpMul:      {"OpMul", []int{}},
+	OpDiv:      {"OpDiv", []int{}},
+	OpTrue:     {"OpTrue", []int{}},
+	OpFalse:    {"OpFalse", []int{}},
+
+	OpEqual:       {"OpEqual", []int{}},
+	OpNotEqual:    {"OpNotEqual", []int{}},
+	OpGreaterThan: {"OpGreaterThan", []int{}},
+
+	OpMinus: {"OpMinus", []int{}},
+	OpBang:  {"OpBang", []int{}},
 }
 
 // 检查
