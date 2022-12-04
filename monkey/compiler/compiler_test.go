@@ -203,73 +203,73 @@ func runCompilerTests(t *testing.T, tests []compilerTestCase) {
 
 // compiler/compiler_test.go
 
-// func TestBooleanExpressions(t *testing.T) {
-// 	tests := []compilerTestCase{
-// 		// [...]
-// 		{
-// 			input:             "1 > 2",
-// 			expectedConstants: []interface{}{1, 2},
-// 			expectedInstructions: []code.Instructions{
-// 				code.Make(code.OpConstant, 0),
-// 				code.Make(code.OpConstant, 1),
-// 				code.Make(code.OpGreaterThan),
-// 				code.Make(code.OpPop),
-// 			},
-// 		},
-// 		{
-// 			input:             "1 < 2",
-// 			expectedConstants: []interface{}{2, 1},
-// 			expectedInstructions: []code.Instructions{
-// 				code.Make(code.OpConstant, 0),
-// 				code.Make(code.OpConstant, 1),
-// 				code.Make(code.OpGreaterThan),
-// 				code.Make(code.OpPop),
-// 			},
-// 		},
-// 		{
-// 			input:             "1 == 2",
-// 			expectedConstants: []interface{}{1, 2},
-// 			expectedInstructions: []code.Instructions{
-// 				code.Make(code.OpConstant, 0),
-// 				code.Make(code.OpConstant, 1),
-// 				code.Make(code.OpEqual),
-// 				code.Make(code.OpPop),
-// 			},
-// 		},
-// 		{
-// 			input:             "1 != 2",
-// 			expectedConstants: []interface{}{1, 2},
-// 			expectedInstructions: []code.Instructions{
-// 				code.Make(code.OpConstant, 0),
-// 				code.Make(code.OpConstant, 1),
-// 				code.Make(code.OpNotEqual),
-// 				code.Make(code.OpPop),
-// 			},
-// 		},
-// 		{
-// 			input:             "true == false",
-// 			expectedConstants: []interface{}{},
-// 			expectedInstructions: []code.Instructions{
-// 				code.Make(code.OpTrue),
-// 				code.Make(code.OpFalse),
-// 				code.Make(code.OpEqual),
-// 				code.Make(code.OpPop),
-// 			},
-// 		},
-// 		{
-// 			input:             "true != false",
-// 			expectedConstants: []interface{}{},
-// 			expectedInstructions: []code.Instructions{
-// 				code.Make(code.OpTrue),
-// 				code.Make(code.OpFalse),
-// 				code.Make(code.OpNotEqual),
-// 				code.Make(code.OpPop),
-// 			},
-// 		},
-// 	}
+func TestBooleanExpressions(t *testing.T) {
+	tests := []compilerTestCase{
+		// [...]
+		{
+			input:             "1 > 2",
+			expectedConstants: []interface{}{1, 2},
+			expectedInstructions: []code.Instructions{
+				code.Make(code.OpConstant, 0),
+				code.Make(code.OpConstant, 1),
+				code.Make(code.OpGreaterThan),
+				code.Make(code.OpPop),
+			},
+		},
+		{
+			input:             "1 < 2",
+			expectedConstants: []interface{}{2, 1},
+			expectedInstructions: []code.Instructions{
+				code.Make(code.OpConstant, 0),
+				code.Make(code.OpConstant, 1),
+				code.Make(code.OpGreaterThan),
+				code.Make(code.OpPop),
+			},
+		},
+		{
+			input:             "1 == 2",
+			expectedConstants: []interface{}{1, 2},
+			expectedInstructions: []code.Instructions{
+				code.Make(code.OpConstant, 0),
+				code.Make(code.OpConstant, 1),
+				code.Make(code.OpEqual),
+				code.Make(code.OpPop),
+			},
+		},
+		{
+			input:             "1 != 2",
+			expectedConstants: []interface{}{1, 2},
+			expectedInstructions: []code.Instructions{
+				code.Make(code.OpConstant, 0),
+				code.Make(code.OpConstant, 1),
+				code.Make(code.OpNotEqual),
+				code.Make(code.OpPop),
+			},
+		},
+		{
+			input:             "true == false",
+			expectedConstants: []interface{}{},
+			expectedInstructions: []code.Instructions{
+				code.Make(code.OpTrue),
+				code.Make(code.OpFalse),
+				code.Make(code.OpEqual),
+				code.Make(code.OpPop),
+			},
+		},
+		{
+			input:             "true != false",
+			expectedConstants: []interface{}{},
+			expectedInstructions: []code.Instructions{
+				code.Make(code.OpTrue),
+				code.Make(code.OpFalse),
+				code.Make(code.OpNotEqual),
+				code.Make(code.OpPop),
+			},
+		},
+	}
 
-// 	runCompilerTests(t, tests)
-// }
+	runCompilerTests(t, tests)
+}
 
 // compiler/compiler_test.go
 
@@ -292,18 +292,113 @@ func TestIntegerArithmetic(t *testing.T) {
 
 // compiler/compiler_test.go
 
-func TestBooleanExpressions(t *testing.T) {
+// func TestBooleanExpressions(t *testing.T) {
+// 	tests := []compilerTestCase{
+// 		// [...]
+// 		{
+// 			input:             "!true",
+// 			expectedConstants: []interface{}{},
+// 			expectedInstructions: []code.Instructions{
+// 				code.Make(code.OpTrue),
+// 				code.Make(code.OpBang),
+// 				code.Make(code.OpPop),
+// 			},
+// 		},
+// 	}
+
+// 	runCompilerTests(t, tests)
+// }
+
+// func TestConditionals(t *testing.T) {
+// 	tests := []compilerTestCase{
+// 		{
+// 			input: `
+// 					if (true) { 10 }; 3333;
+// 					`,
+// 			expectedConstants: []interface{}{10, 3333},
+// 			expectedInstructions: []code.Instructions{
+// 				// 0000
+// 				code.Make(code.OpTrue),
+// 				// 0001
+// 				code.Make(code.OpJumpNotTruthy, 7),
+// 				// 0004
+// 				code.Make(code.OpConstant, 0),
+// 				// 0007
+// 				code.Make(code.OpPop),
+// 				// 0008
+// 				code.Make(code.OpConstant, 1),
+// 				// 0011
+// 				code.Make(code.OpPop),
+// 			},
+// 		},
+// 	}
+
+// 	runCompilerTests(t, tests)
+// }
+
+// compiler/compiler_test.go
+
+// func TestConditionals(t *testing.T) {
+// 	tests := []compilerTestCase{
+// 		// [...]
+// 		{
+// 			input: `
+// 					if (true) { 10 } else { 20 }; 3333;
+// 					`,
+// 			expectedConstants: []interface{}{10, 20, 3333},
+// 			expectedInstructions: []code.Instructions{
+// 				// 0000
+// 				code.Make(code.OpTrue),
+// 				// 0001
+// 				code.Make(code.OpJumpNotTruthy, 10),
+// 				// 0004
+// 				code.Make(code.OpConstant, 0),
+// 				// 0007
+// 				code.Make(code.OpJump, 13),
+// 				// 0010
+// 				code.Make(code.OpConstant, 1),
+// 				// 0013
+// 				code.Make(code.OpPop),
+// 				// 0014
+// 				code.Make(code.OpConstant, 2),
+// 				// 0017
+// 				code.Make(code.OpPop),
+// 			},
+// 		},
+// 	}
+
+// 	runCompilerTests(t, tests)
+// }
+
+// compiler/compiler_test.go
+
+func TestConditionals(t *testing.T) {
 	tests := []compilerTestCase{
-		// [...]
 		{
-			input:             "!true",
-			expectedConstants: []interface{}{},
+			input: `
+					if (true) { 10 }; 3333;
+					`,
+			expectedConstants: []interface{}{10, 3333},
 			expectedInstructions: []code.Instructions{
+				// 0000
 				code.Make(code.OpTrue),
-				code.Make(code.OpBang),
+				// 0001
+				code.Make(code.OpJumpNotTruthy, 10),
+				// 0004
+				code.Make(code.OpConstant, 0),
+				// 0007
+				code.Make(code.OpJump, 11),
+				// 0010
+				code.Make(code.OpNull),
+				// 0011
+				code.Make(code.OpPop),
+				// 0012
+				code.Make(code.OpConstant, 1),
+				// 0015
 				code.Make(code.OpPop),
 			},
 		},
+		// [...]
 	}
 
 	runCompilerTests(t, tests)

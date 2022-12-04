@@ -35,3 +35,6 @@ constants    []object.Object   // 数据池
 }
 ```
 通过sp 指针索引，实现入栈 出栈
+
+### if 条件语句
+跳转指令

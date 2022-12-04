@@ -14,19 +14,23 @@ type Opcode byte // 字节描述
 
 // 操作数
 const (
-	OpConstant    Opcode = iota // 常量
-	OpAdd                       // +
-	OpPop                       // 弹出
-	OpSub                       // -
-	OpMul                       // *
-	OpDiv                       // /
-	OpTrue                      // true
-	OpFalse                     // false
-	OpEqual                     // ==
-	OpNotEqual                  // ！=
-	OpGreaterThan               // >
-	OpMinus                     // -7
-	OpBang                      // ！true
+	OpConstant      Opcode = iota // 常量
+	OpAdd                         // +
+	OpPop                         // 弹出
+	OpSub                         // -
+	OpMul                         // *
+	OpDiv                         // /
+	OpTrue                        // true
+	OpFalse                       // false
+	OpEqual                       // ==
+	OpNotEqual                    // ！=
+	OpGreaterThan                 // >
+	OpMinus                       // -7
+	OpBang                        // ！true
+	OpJumpNotTruthy               // not true 跳转指令
+	OpJump                        // 跳转指令
+
+	OpNull // null
 )
 
 type Definition struct {
@@ -50,6 +54,11 @@ var definitions = map[Opcode]*Definition{
 
 	OpMinus: {"OpMinus", []int{}},
 	OpBang:  {"OpBang", []int{}},
+
+	OpJumpNotTruthy: {"OpJumpNotTruthy", []int{2}},
+	OpJump:          {"OpJump", []int{2}},
+
+	OpNull: {"OpNull", []int{}},
 }
 
 // 检查
