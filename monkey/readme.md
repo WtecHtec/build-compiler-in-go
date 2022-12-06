@@ -34,7 +34,18 @@ constants    []object.Object   // 数据池
 	sp    int             // 始终指向栈中的下一个空闲槽。栈顶的值是stack[sp-1]
 }
 ```
-通过sp 指针索引，实现入栈 出栈
+通过sp 指针索引，实现入栈 出栈。遍历 instructions 字节码数组，通过判断不同的操作符，调用stack出入栈，实现代码运行
 
-### if 条件语句
-跳转指令
+# 字节码转换格式
+## 常量
+[opt, value]
+value 存放在  constants 数据池中，
+instructions 存放的是constants 数据池中value的索引
+## 算式
+[value, value, opt]
+## 比较
+[value, value, opt]
+## if 条件语句
+[con , jump_not, ex jump, ex]
+新增 跳转指令, 指定跳转位置的索引。
+[ 4 , > , 5, { jump_not: 6 }, 1 , + , 1, { jump: 12}, 1 , +, 2,]
