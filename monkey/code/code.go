@@ -14,7 +14,7 @@ type Opcode byte // 字节描述
 
 // 操作数
 const (
-	OpConstant      Opcode = iota // 常量
+	OpConstant      Opcode = iota // 常量，读取栈时是读取它所在的索引
 	OpAdd                         // +
 	OpPop                         // 弹出
 	OpSub                         // -
@@ -31,6 +31,9 @@ const (
 	OpJump                        // 跳转指令
 
 	OpNull // null
+
+	OpGetGlobal // 声明变量
+	OpSetGlobal // 获取变量
 )
 
 type Definition struct {
@@ -59,6 +62,9 @@ var definitions = map[Opcode]*Definition{
 	OpJump:          {"OpJump", []int{2}},
 
 	OpNull: {"OpNull", []int{}},
+
+	OpGetGlobal: {"OpGetGlobal", []int{2}},
+	OpSetGlobal: {"OpSetGlobal", []int{2}},
 }
 
 // 检查
