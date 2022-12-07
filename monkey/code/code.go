@@ -34,6 +34,12 @@ const (
 
 	OpGetGlobal // 声明变量
 	OpSetGlobal // 获取变量
+
+	OpArray // 数组
+
+	OpHash // 哈希
+
+	OpIndex // arry[i] 索引
 )
 
 type Definition struct {
@@ -65,6 +71,12 @@ var definitions = map[Opcode]*Definition{
 
 	OpGetGlobal: {"OpGetGlobal", []int{2}},
 	OpSetGlobal: {"OpSetGlobal", []int{2}},
+
+	OpArray: {"OpArray", []int{2}},
+
+	OpHash: {"OpHash", []int{2}},
+
+	OpIndex: {"OpIndex", []int{}},
 }
 
 // 检查
