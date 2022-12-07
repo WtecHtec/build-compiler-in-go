@@ -64,3 +64,11 @@ instructions 存放的是constants 数据池中value的索引
 定义 字节标识 OpHash, 记录此时数组的长度，遇到 OpHash 字节码时，倒序获取数组的值，存放再一个数组中.
 类似于数组，但不同的时，哈希key-值，偏移量为2
 [key, v , key,v, {OpArray , 4}]
+
+## 函数
+类型object 添加 函数字节码的数据类型： COMPILED_FUNCTION_OBJ
+添加字节码：OpCall
+### OpCall的使用方式。
+首先，使用OpConstant指令将想调用的函数压栈。随后发出OpCall指令，让虚拟机执行栈顶的函数
+### retrun 
+return字节码：OpReturnValue；返回的值必须位于栈顶。

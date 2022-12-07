@@ -40,6 +40,10 @@ const (
 	OpHash // 哈希
 
 	OpIndex // arry[i] 索引
+
+	OpCall // 函数
+
+	OpReturnValue // return
 )
 
 type Definition struct {
@@ -77,6 +81,10 @@ var definitions = map[Opcode]*Definition{
 	OpHash: {"OpHash", []int{2}},
 
 	OpIndex: {"OpIndex", []int{}},
+
+	OpCall: {"OpCall", []int{}},
+
+	OpReturnValue: {"OpReturnValue", []int{}},
 }
 
 // 检查
