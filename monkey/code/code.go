@@ -43,7 +43,8 @@ const (
 
 	OpCall // 函数
 
-	OpReturnValue // return
+	OpReturnValue // 显示 return
+	OpReturn      // 隐式 return
 )
 
 type Definition struct {
@@ -85,6 +86,7 @@ var definitions = map[Opcode]*Definition{
 	OpCall: {"OpCall", []int{}},
 
 	OpReturnValue: {"OpReturnValue", []int{}},
+	OpReturn:      {"OpReturn", []int{}},
 }
 
 // 检查

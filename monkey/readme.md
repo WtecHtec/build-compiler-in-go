@@ -43,14 +43,22 @@ value 存放在  constants 数据池中，
 instructions 存放的是constants 数据池中value的索引
 ## 算式
 [value, value, opt]
+5 + 6
+[value, value, add]
 ## 比较
 [value, value, opt]
+5 > 6
+[value, value, than]
 ## if 条件语句
-[con , jump_not, ex jump, ex]
+[con , jump_not, ex, jump, ex]
 新增 跳转指令, 指定跳转位置的索引。
 [ 4 , > , 5, { jump_not: 6 }, 1 , + , 1, { jump: 12}, 1 , +, 2,]
+if (4 > 5) { 6 } else { 7}
+[value, value, than, jump_not, value, jump, value]
 ## 变量声明
 变量、值将会放在全局的一个符号表（作用域）中,通过索引存、取。
+let a = 8;
+[value, OpSetGlobal]
 ### 符号表()
 符号表是解释器和编译器中用于将标识符与信息相关联的数据结构。它可以用在从词法分析到代码生成的所有阶段，
 作用是存储和检索有关标识符（也被称为符号）的信息，比如标识符的位置、所在作用域、是否已经被定义、绑定值的类型，以及解释过程和编译过程中的有用信息。
@@ -72,3 +80,11 @@ instructions 存放的是constants 数据池中value的索引
 首先，使用OpConstant指令将想调用的函数压栈。随后发出OpCall指令，让虚拟机执行栈顶的函数
 ### retrun 
 return字节码：OpReturnValue；返回的值必须位于栈顶。
+
+·object.CompiledFunction用来保存编译函数的指令，并将它们以常量的形式作为字节码的一部分从编译器传递给虚拟机。·code.OpCall用来让虚拟机开始执行位于栈顶部的*object.CompiledFunction。
+·code.OpReturnValue用来让虚拟机将栈顶的值返回到调用上下文并在此恢复执行。
+·code.OpReturn，与code.OpReturnValue类似，不同之处在于没有显式返回值，而是隐式返回vm.Null。
+
+### 格式
+fu() { return 5 + 10}
+[value , value, add, return]
