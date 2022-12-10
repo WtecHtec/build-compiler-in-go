@@ -8,13 +8,22 @@ import (
 )
 
 // fn指向帧引用的已编译函数，ip则表示该帧的指令指针
+// vm/frame.go
+
 type Frame struct {
-	fn *object.CompiledFunction
-	ip int
+	fn          *object.CompiledFunction
+	ip          int
+	basePointer int
 }
 
-func NewFrame(fn *object.CompiledFunction) *Frame {
-	return &Frame{fn: fn, ip: -1}
+func NewFrame(fn *object.CompiledFunction, basePointer int) *Frame {
+	f := &Frame{
+		fn:          fn,
+		ip:          -1,
+		basePointer: basePointer,
+	}
+
+	return f
 }
 
 func (f *Frame) Instructions() code.Instructions {

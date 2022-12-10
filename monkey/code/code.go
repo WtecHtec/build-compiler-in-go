@@ -45,6 +45,9 @@ const (
 
 	OpReturnValue // 显示 return
 	OpReturn      // 隐式 return
+
+	OpGetLocal
+	OpSetLocal
 )
 
 type Definition struct {
@@ -87,6 +90,9 @@ var definitions = map[Opcode]*Definition{
 
 	OpReturnValue: {"OpReturnValue", []int{}},
 	OpReturn:      {"OpReturn", []int{}},
+
+	OpGetLocal: {"OpGetLocal", []int{1}},
+	OpSetLocal: {"OpSetLocal", []int{1}},
 }
 
 // 检查
@@ -121,6 +127,8 @@ func Make(op Opcode, operands ...int) []byte {
 		case 2:
 			// 256 进制 2 个字节
 			binary.BigEndian.PutUint16(instruction[offset:], uint16(o))
+		case 1:
+			instruction[offset] = byte(o)
 		}
 		offset += width
 	}
@@ -173,6 +181,8 @@ func ReadOperands(def *Definition, ins Instructions) ([]int, int) {
 		switch width {
 		case 2:
 			operands[i] = int(ReadUint16(ins[offset:]))
+		case 1:
+			operands[i] = int(ReadUint8(ins[offset:]))
 		}
 
 		offset += width
@@ -185,3 +195,5 @@ func ReadUint16(ins Instructions) uint16 {
 	// 2 个字节
 	return binary.BigEndian.Uint16(ins)
 }
+
+func ReadUint8(ins Instructions) uint8 { return uint8(ins[0]) }
