@@ -92,3 +92,6 @@ fu() { return 5 + 10}
 ## 局部变量
 OpGetLocal、OpSetLocal 新增两个操作符。
 symbol_table 符号表中新增字段：Outer 表示父级作用域
+
+## 内置函数
+OpGetBuiltin 内置函数操作符, 在符号表中记录索引

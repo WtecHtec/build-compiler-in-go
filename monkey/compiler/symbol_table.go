@@ -5,6 +5,8 @@ type SymbolScope string
 const (
 	LocalScope  SymbolScope = "LOCAL"
 	GlobalScope SymbolScope = "GLOBAL"
+
+	BuiltinScope SymbolScope = "BUILTIN"
 )
 
 type Symbol struct {
@@ -59,4 +61,12 @@ func NewEnclosedSymbolTable(outer *SymbolTable) *SymbolTable {
 	s := NewSymbolTable()
 	s.Outer = outer
 	return s
+}
+
+// compiler/symbol_table.go
+
+func (s *SymbolTable) DefineBuiltin(index int, name string) Symbol {
+	symbol := Symbol{Name: name, Index: index, Scope: BuiltinScope}
+	s.store[name] = symbol
+	return symbol
 }
