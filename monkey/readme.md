@@ -75,7 +75,7 @@ let a = 8;
 
 ## 函数
 类型object 添加 函数字节码的数据类型： COMPILED_FUNCTION_OBJ
-添加字节码：OpCall
+添加字节码：OpCall (函数调用)
 ### OpCall的使用方式。
 首先，使用OpConstant指令将想调用的函数压栈。随后发出OpCall指令，让虚拟机执行栈顶的函数
 ### retrun 
